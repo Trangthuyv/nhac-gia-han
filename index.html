@@ -66,6 +66,9 @@
   .item-title { margin: 0; overflow-wrap: anywhere; font-size: 1.03rem; font-weight: 700; }
   .item-date { margin: 5px 0 0; color: var(--muted); font-size: .86rem; }
   .item-emails { margin: 4px 0 0; overflow-wrap: anywhere; color: var(--muted); font-size: .8rem; }
+  .item-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 5px 0 0; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: .74rem; font-weight: 650; overflow-wrap: anywhere; }
+  .badge.private { background: var(--gold-soft); color: #5e4a20; }
   .item-note { margin: 6px 0 0; padding-left: 9px; border-left: 2px solid var(--line); color: var(--muted); font-size: .83rem; white-space: pre-wrap; overflow-wrap: anywhere; }
   .item-side { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
   .due-label { color: var(--green); font-size: .82rem; font-weight: 700; white-space: nowrap; }
@@ -159,6 +162,7 @@
       <button class="filter active" type="button" data-filter="all">Tất cả</button>
       <button class="filter" type="button" data-filter="soon">Sắp đến hạn</button>
       <button class="filter" type="button" data-filter="overdue">Đã quá hạn</button>
+      <button class="filter" type="button" data-filter="private" id="private-filter" hidden>Lịch riêng</button>
     </div>
     <div class="items" id="items" aria-live="polite"></div>
     <p class="local-note" id="local-note" hidden>Dữ liệu đang lưu trên thiết bị này. Triển khai theo hướng dẫn để đồng bộ và tự gửi email.</p>
@@ -175,6 +179,7 @@
     </div>
     <div class="due-preview" id="due-preview">Ngày đến hạn sẽ được tính tự động.</div>
     <label class="field">Nhắc trước (ngày)<input id="reminder-days" name="reminderDays" type="number" min="0" max="365" step="1" value="7" required><small class="field-hint">Nhập 0 để nhận nhắc vào đúng ngày đến hạn.</small></label>
+    <label class="field" id="visibility-field" hidden>Ai xem được<select id="visibility" name="visibility"><option value="shared">Chung – mọi người được mời</option><option value="private">Riêng – chỉ mình tôi</option></select><small class="field-hint" id="visibility-hint">Lịch riêng chỉ hiện trong app của bạn.</small></label>
     <label class="field">Email muốn nhận thông báo<input id="emails" name="emails" placeholder="email1@example.com, email2@example.com" required></label>
     <label class="field">Ghi chú<textarea id="note" name="note" maxlength="1000" rows="3" placeholder="Thông tin bổ sung cho lịch này"></textarea></label>
     <p class="form-error" id="form-error" role="alert"></p>
@@ -208,7 +213,7 @@
       <input id="user-email" type="email" autocomplete="email" placeholder="email@example.com" aria-label="Email Google cần mời" required>
       <button class="save-btn" type="submit">Mời</button>
     </form>
-    <p class="help-copy">Người được mời sẽ có quyền xem và sửa toàn bộ lịch chung. Quyền Sheet được cấp tự động; họ cần đăng nhập bằng đúng tài khoản Google này.</p>
+    <p class="help-copy">Người được mời xem và sửa được các lịch <strong>Chung</strong>; lịch <strong>Riêng</strong> chỉ hiện trong app của người tạo. Quyền Sheet được cấp tự động; họ cần đăng nhập bằng đúng tài khoản Google này. Lưu ý: người được mời mở thẳng Google Sheet vẫn thấy mọi dòng.</p>
     <div class="dialog-actions"><button class="secondary-btn" type="button" data-close="users-dialog">Đóng</button></div>
   </div>
 </dialog>
@@ -376,8 +381,14 @@ async function syncPendingChanges() {
     }
     while (pendingChanges.length) {
       const change = pendingChanges[0];
-      if (change.action === 'save') await callCloud('saveRecord', change.record);
-      else await callCloud('deleteRecord', change.id);
+      try {
+        if (change.action === 'save') await callCloud('saveRecord', change.record);
+        else await callCloud('deleteRecord', change.id);
+      } catch (error) {
+        // The schedule became someone else's private one while offline: drop the change instead of blocking the queue.
+        if (!/lịch riêng của người khác/i.test(error?.message || '')) throw error;
+        showToast('Bỏ qua một thay đổi vì lịch đó đã chuyển thành lịch riêng của người khác.');
+      }
       pendingChanges.shift();
       persistLocal();
     }
@@ -477,7 +488,26 @@ async function loadRecords() {
   $('#local-note').hidden = false;
 }
 
+function signedInEmail() {
+  return cloudAccessError ? '' : String(currentUser?.email || '').toLowerCase();
+}
+
+function canChangeVisibility(item) {
+  const me = signedInEmail();
+  return !!me && (!item || !item.owner || item.owner === me);
+}
+
+function recordBadges(item) {
+  const me = signedInEmail();
+  if (!me) return '';
+  const badges = [];
+  if (item.visibility === 'private') badges.push('<span class="badge private">🔒 Riêng</span>');
+  if (item.owner && item.owner !== me) badges.push(`<span class="badge">Tạo bởi ${esc(item.owner)}</span>`);
+  return badges.length ? `<div class="item-badges">${badges.join('')}</div>` : '';
+}
+
 function render() {
+  $('#private-filter').hidden = !signedInEmail();
   if (cloudAccessError) {
     $('#soon-count').textContent = '—';
     $('#active-count').textContent = '—';
@@ -491,6 +521,7 @@ function render() {
     const days = daysBetween(today, item.dueDate);
     if (filter === 'soon') return days >= 0 && days <= 30;
     if (filter === 'overdue') return days < 0;
+    if (filter === 'private') return item.visibility === 'private';
     return true;
   }).sort((a, b) => a.dueDate.localeCompare(b.dueDate));
 
@@ -506,7 +537,7 @@ function render() {
     return `<article class="item ${state}">
       <div class="item-main"><h3 class="item-title">${esc(item.content)}</h3>
         <p class="item-date">Bắt đầu ${formatDate(item.startDate)} · ${Number(item.duration ?? item.months)} ${item.unit === 'days' ? 'ngày' : item.unit === 'years' ? 'năm' : 'tháng'} · Hạn ${formatDate(item.dueDate)} · Nhắc trước ${Number(item.reminderDays ?? 7)} ngày</p>
-        <p class="item-emails">${esc(item.emails)}</p>${item.note ? `<p class="item-note">${esc(item.note)}</p>` : ''}</div>
+        <p class="item-emails">${esc(item.emails)}</p>${recordBadges(item)}${item.note ? `<p class="item-note">${esc(item.note)}</p>` : ''}</div>
       <div class="item-side"><span class="due-label">${label}</span>
         <div class="item-buttons"><button type="button" data-edit="${esc(item.id)}" aria-label="Sửa ${esc(item.content)}" title="Sửa">✎</button><button class="delete" type="button" data-delete="${esc(item.id)}" aria-label="Xóa ${esc(item.content)}" title="Xóa">×</button></div>
       </div></article>`;
@@ -585,6 +616,12 @@ function openForm(id = '') {
   $('#emails').value = item?.emails || '';
   $('#reminder-days').value = item?.reminderDays ?? 7;
   $('#note').value = item?.note || '';
+  $('#visibility-field').hidden = !signedInEmail();
+  $('#visibility').value = item?.visibility || 'shared';
+  $('#visibility').disabled = !canChangeVisibility(item);
+  $('#visibility-hint').textContent = $('#visibility').disabled
+    ? 'Chỉ người tạo mới đổi được phạm vi của lịch này.'
+    : 'Lịch riêng chỉ hiện trong app của bạn.';
   $('#form-error').textContent = '';
   refreshDuePreview();
   $('#record-dialog').showModal();
@@ -694,7 +731,13 @@ $('#record-form').addEventListener('submit', async (event) => {
     $('#form-error').textContent = 'Số ngày nhắc trước phải từ 0 đến 365.';
     return;
   }
-  const record = { id: editingId || crypto.randomUUID(), content, startDate, duration, unit, dueDate: dueDateFor(startDate, duration, unit), emails: emails.join(', '), note: $('#note').value.trim(), reminderDays };
+  const existing = records.find((item) => item.id === editingId);
+  const record = {
+    id: editingId || crypto.randomUUID(), content, startDate, duration, unit, dueDate: dueDateFor(startDate, duration, unit),
+    emails: emails.join(', '), note: $('#note').value.trim(), reminderDays,
+    owner: existing?.owner || signedInEmail(),
+    visibility: canChangeVisibility(existing) ? $('#visibility').value : existing?.visibility || 'shared',
+  };
   try {
     if (PWA_MODE) {
       const change = { action: 'save', record };

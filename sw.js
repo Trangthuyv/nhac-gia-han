@@ -1,4 +1,4 @@
-const CACHE = 'nhac-gia-han-v2';
+const CACHE = 'nhac-gia-han-v3';
 const FILES = ['./', './index.html', './config.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (event) => {
