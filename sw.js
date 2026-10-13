@@ -1,3 +1,4 @@
+// Tăng số phiên bản CACHE (và APP_VERSION trong index.html) mỗi lần cập nhật app.
 const CACHE = 'nhac-gia-han-v3';
 const FILES = ['./', './index.html', './config.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
 

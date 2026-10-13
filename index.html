@@ -80,6 +80,7 @@
   .empty { padding: 44px 18px; border: 1px dashed #b9c9bd; border-radius: 5px; color: var(--muted); text-align: center; }
   .empty strong { display: block; margin-bottom: 5px; color: var(--ink); font: 500 1.35rem Georgia, "Times New Roman", serif; }
   .local-note { margin: 15px 0 0; color: var(--muted); font-size: .8rem; }
+  .app-version { margin: 28px 0 0; color: var(--muted); font-size: .74rem; text-align: center; opacity: .8; }
   .toast { position: fixed; z-index: 10; left: 50%; bottom: 22px; width: max-content; max-width: calc(100vw - 28px); transform: translateX(-50%); padding: 10px 15px; border-radius: 4px; background: var(--ink); color: white; box-shadow: var(--shadow); }
   dialog { width: min(100% - 24px, 500px); max-height: min(90vh, 760px); padding: 0; overflow: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); box-shadow: 0 24px 70px #14291e40; }
   dialog::backdrop { background: #10231cb3; backdrop-filter: blur(3px); }
@@ -167,6 +168,7 @@
     <div class="items" id="items" aria-live="polite"></div>
     <p class="local-note" id="local-note" hidden>Dữ liệu đang lưu trên thiết bị này. Triển khai theo hướng dẫn để đồng bộ và tự gửi email.</p>
   </section>
+  <p class="app-version" id="app-version"></p>
 </main>
 
 <dialog id="record-dialog">
@@ -223,6 +225,8 @@
 <script src="./config.js"></script>
 <script>
 'use strict';
+// Tăng số này (và CACHE trong sw.js) mỗi lần cập nhật app để biết điện thoại đang chạy bản nào.
+const APP_VERSION = '3 · 13/10/2026';
 const $ = (selector) => document.querySelector(selector);
 const STORAGE_KEY = 'nhac-gia-han-records';
 const PWA_CONFIG = window.APP_CONFIG || {};
@@ -628,7 +632,8 @@ function openForm(id = '') {
   $('#content').focus();
 }
 
-$('#today-label').textContent = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(today);
+$('#app-version').textContent = 'Phiên bản ' + APP_VERSION;
+$('#today-label').textContent =new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(today);
 $('#add-btn').addEventListener('click', () => openForm());
 $('#help-btn').addEventListener('click', () => $('#help-dialog').showModal());
 $('#users-btn').addEventListener('click', async () => {
