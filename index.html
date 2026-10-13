@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17483f">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nhắc gia hạn">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2317483f'/%3E%3Cpath d='M18 19h28v29H18zM24 15v8m16-8v8M18 28h28m-20 7h4m5 0h4m-13 7h4m5 0h4' fill='none' stroke='%23f8f6eb' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<title>Nhắc gia hạn</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #18302a;
+    --muted: #687972;
+    --paper: #f2f5f0;
+    --surface: #fffefa;
+    --line: #dce5dd;
+    --green: #17483f;
+    --green-soft: #e2eee7;
+    --coral: #bd553d;
+    --coral-soft: #fae9e3;
+    --gold: #886522;
+    --gold-soft: #f6efd9;
+    --shadow: 0 12px 34px rgba(29, 57, 46, .07);
+  }
+  * { box-sizing: border-box; }
+  html { min-width: 320px; background: var(--paper); }
+  body { margin: 0; color: var(--ink); font: 15px/1.5 "Aptos", "Segoe UI", sans-serif; background: radial-gradient(ellipse at 85% 0%, #e2eee4 0, transparent 35rem), var(--paper); }
+  button, input, select, textarea { font: inherit; }
+  button { color: inherit; cursor: pointer; }
+  .top { background: var(--green); color: #f8f6eb; padding: max(25px, env(safe-area-inset-top)) 22px 28px; }
+  .top-inner, main { width: min(100% - 36px, 940px); margin: 0 auto; }
+  .top-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .eyebrow { margin: 0 0 4px; color: #b9d1c4; font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+  h1 { margin: 0; font: 500 clamp(1.8rem, 5vw, 2.5rem)/1.1 Georgia, "Times New Roman", serif; }
+  .today { margin: 9px 0 0; color: #d5e4d9; font-size: .9rem; }
+  .top-actions { display: flex; align-items: center; gap: 8px; }
+  .connection { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #638479; border-radius: 999px; padding: 7px 10px; color: #e0eee3; font-size: .78rem; white-space: nowrap; }
+  .connection::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #e6c474; }
+  .connection.cloud::before { background: #8dd0a0; }
+  .icon-btn { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #638479; border-radius: 50%; background: transparent; color: #fff; font-size: 1.1rem; }
+  .icon-btn[hidden] { display: none; }
+  .cloud-bridge { position: fixed; width: 1px; height: 1px; left: -2px; bottom: -2px; border: 0; opacity: 0; pointer-events: none; }
+  main { padding: 23px 0 max(36px, env(safe-area-inset-bottom)); }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+  .stat { min-height: 94px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); padding: 13px 16px; box-shadow: var(--shadow); }
+  .stat-label { color: var(--muted); font-size: .82rem; }
+  .stat-value { margin-top: 1px; font: 600 1.9rem/1.2 Georgia, "Times New Roman", serif; }
+  .stat.next .stat-value { color: var(--coral); }
+  .list-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
+  .list-head h2 { margin: 0; font: 500 1.45rem/1.2 Georgia, "Times New Roman", serif; }
+  .add-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 14px; border: 0; border-radius: 4px; background: var(--coral); color: white; font-weight: 650; }
+  .add-btn span { font-size: 1.3rem; line-height: 1; }
+  .filters { display: flex; gap: 7px; padding: 0 0 11px; overflow-x: auto; }
+  .filter { flex: 0 0 auto; border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; background: transparent; color: var(--muted); font-size: .84rem; }
+  .filter.active { border-color: var(--green); background: var(--green); color: #fff; }
+  .items { display: grid; gap: 9px; }
+  .item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 15px 16px; border: 1px solid var(--line); border-left: 4px solid #80a48b; border-radius: 4px; background: var(--surface); box-shadow: var(--shadow); }
+  .item.soon { border-left-color: var(--coral); }
+  .item.overdue { border-left-color: #9e382e; }
+  .item-main { min-width: 0; }
+  .item-title { margin: 0; overflow-wrap: anywhere; font-size: 1.03rem; font-weight: 700; }
+  .item-date { margin: 5px 0 0; color: var(--muted); font-size: .86rem; }
+  .item-emails { margin: 4px 0 0; overflow-wrap: anywhere; color: var(--muted); font-size: .8rem; }
+  .item-note { margin: 6px 0 0; padding-left: 9px; border-left: 2px solid var(--line); color: var(--muted); font-size: .83rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .item-side { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+  .due-label { color: var(--green); font-size: .82rem; font-weight: 700; white-space: nowrap; }
+  .soon .due-label, .overdue .due-label { color: var(--coral); }
+  .item-buttons { display: flex; gap: 3px; }
+  .item-buttons button { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 4px; background: transparent; color: var(--muted); font-size: 1rem; }
+  .item-buttons button:hover { background: var(--green-soft); color: var(--green); }
+  .item-buttons .delete:hover { background: var(--coral-soft); color: var(--coral); }
+  .empty { padding: 44px 18px; border: 1px dashed #b9c9bd; border-radius: 5px; color: var(--muted); text-align: center; }
+  .empty strong { display: block; margin-bottom: 5px; color: var(--ink); font: 500 1.35rem Georgia, "Times New Roman", serif; }
+  .local-note { margin: 15px 0 0; color: var(--muted); font-size: .8rem; }
+  .toast { position: fixed; z-index: 10; left: 50%; bottom: 22px; width: max-content; max-width: calc(100vw - 28px); transform: translateX(-50%); padding: 10px 15px; border-radius: 4px; background: var(--ink); color: white; box-shadow: var(--shadow); }
+  dialog { width: min(100% - 24px, 500px); max-height: min(90vh, 760px); padding: 0; overflow: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); box-shadow: 0 24px 70px #14291e40; }
+  dialog::backdrop { background: #10231cb3; backdrop-filter: blur(3px); }
+  .dialog-inner { padding: 22px; }
+  .dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+  .dialog-head h2 { margin: 0; font: 500 1.55rem/1.2 Georgia, "Times New Roman", serif; }
+  .dialog-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: transparent; font-size: 1.15rem; }
+  .field { display: block; margin: 0 0 14px; color: var(--muted); font-size: .83rem; font-weight: 650; }
+  .field input, .field select, .field textarea { display: block; width: 100%; min-height: 45px; margin-top: 5px; padding: 9px 11px; border: 1px solid var(--line); border-radius: 4px; outline: none; background: white; color: var(--ink); }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px #17483f18; }
+  .field textarea { min-height: 74px; resize: vertical; }
+  .date-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .duration-controls { display: grid; grid-template-columns: minmax(0, 1fr) 92px; gap: 6px; }
+  .duration-controls input, .duration-controls select { min-width: 0; }
+  .due-preview { margin: -1px 0 15px; padding: 10px 12px; border-left: 3px solid var(--gold); background: var(--gold-soft); color: #5e4a20; font-size: .87rem; }
+  .field-hint { display: block; margin-top: 4px; color: var(--muted); font-size: .78rem; font-weight: 400; }
+  .form-error { min-height: 1.2em; margin: -4px 0 10px; color: var(--coral); font-size: .83rem; }
+  .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+  .secondary-btn, .save-btn { min-height: 42px; padding: 0 15px; border: 1px solid var(--line); border-radius: 4px; background: transparent; }
+  .save-btn { border-color: var(--green); background: var(--green); color: #fff; font-weight: 650; }
+  .help-copy { color: var(--muted); font-size: .91rem; }
+  .help-copy h3 { margin: 17px 0 5px; color: var(--ink); font-size: .98rem; }
+  .help-copy ol { padding-left: 22px; }
+  .help-copy li { margin: 0 0 7px; }
+  .help-copy code { overflow-wrap: anywhere; color: var(--green); }
+  .user-list { display: grid; gap: 8px; }
+  .user-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .user-row:last-child { border-bottom: 0; }
+  .user-email { min-width: 0; overflow-wrap: anywhere; font-weight: 600; }
+  .user-role { display: block; color: var(--muted); font-size: .78rem; font-weight: 400; }
+  .revoke-btn { flex: 0 0 auto; min-height: 36px; padding: 0 10px; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--coral); }
+  .revoke-btn:disabled { color: var(--muted); cursor: default; }
+  .user-form { display: flex; gap: 8px; margin-top: 16px; }
+  .user-form input { flex: 1; min-width: 0; min-height: 42px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; }
+  .user-form button:disabled, .add-btn:disabled { opacity: .55; cursor: not-allowed; }
+  .access-empty { color: var(--muted); font-size: .9rem; }
+  @media (min-width: 680px) {
+    main { padding-top: 30px; }
+    .stats { grid-template-columns: 210px 210px; }
+    .item { padding: 17px 19px; }
+  }
+  @media (max-width: 480px) {
+    .top { padding-right: 18px; padding-left: 18px; }
+    .top-inner, main { width: calc(100% - 28px); }
+    .connection { max-width: 125px; overflow: hidden; text-overflow: ellipsis; }
+    .item { gap: 8px; padding: 13px 11px; }
+    .item-date { font-size: .8rem; }
+    .due-label { font-size: .76rem; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="top-row">
+      <div>
+        <p class="eyebrow">Theo dõi định kỳ</p>
+        <h1>Nhắc gia hạn</h1>
+        <p class="today" id="today-label"></p>
+      </div>
+      <div class="top-actions">
+        <span class="connection" id="connection-state">Đang tải</span>
+        <button class="icon-btn" id="users-btn" type="button" aria-label="Quản lý người dùng" title="Quản lý người dùng" hidden>♙</button>
+        <button class="icon-btn" id="help-btn" type="button" aria-label="Hướng dẫn cài đặt" title="Hướng dẫn cài đặt">?</button>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="stats" aria-label="Tổng quan">
+    <div class="stat next"><div class="stat-label">Đến hạn trong 30 ngày</div><div class="stat-value" id="soon-count">0</div></div>
+    <div class="stat"><div class="stat-label">Đang theo dõi</div><div class="stat-value" id="active-count">0</div></div>
+  </section>
+  <section aria-labelledby="list-title">
+    <div class="list-head">
+      <h2 id="list-title">Lịch của bạn</h2>
+      <button class="add-btn" id="add-btn" type="button"><span aria-hidden="true">+</span> Thêm lịch</button>
+    </div>
+    <div class="filters" role="group" aria-label="Lọc lịch">
+      <button class="filter active" type="button" data-filter="all">Tất cả</button>
+      <button class="filter" type="button" data-filter="soon">Sắp đến hạn</button>
+      <button class="filter" type="button" data-filter="overdue">Đã quá hạn</button>
+    </div>
+    <div class="items" id="items" aria-live="polite"></div>
+    <p class="local-note" id="local-note" hidden>Dữ liệu đang lưu trên thiết bị này. Triển khai theo hướng dẫn để đồng bộ và tự gửi email.</p>
+  </section>
+</main>
+
+<dialog id="record-dialog">
+  <form id="record-form" class="dialog-inner">
+    <div class="dialog-head"><h2 id="form-title">Thêm lịch gia hạn</h2><button class="dialog-close" type="button" data-close="record-dialog" aria-label="Đóng">×</button></div>
+    <label class="field">Nội dung<input id="content" name="content" maxlength="160" placeholder="Ví dụ: Thay lõi lọc thô" required></label>
+    <div class="date-fields">
+      <label class="field">Ngày bắt đầu<input id="start-date" name="startDate" type="date" required></label>
+      <div class="field"><label for="duration">Thời hạn</label><div class="duration-controls"><input id="duration" name="duration" type="number" min="1" max="1200" step="1" value="6" required><select id="duration-unit" aria-label="Đơn vị thời hạn"><option value="days">Ngày</option><option value="months">Tháng</option><option value="years">Năm</option></select></div></div>
+    </div>
+    <div class="due-preview" id="due-preview">Ngày đến hạn sẽ được tính tự động.</div>
+    <label class="field">Nhắc trước (ngày)<input id="reminder-days" name="reminderDays" type="number" min="0" max="365" step="1" value="7" required><small class="field-hint">Nhập 0 để nhận nhắc vào đúng ngày đến hạn.</small></label>
+    <label class="field">Email muốn nhận thông báo<input id="emails" name="emails" placeholder="email1@example.com, email2@example.com" required></label>
+    <label class="field">Ghi chú<textarea id="note" name="note" maxlength="1000" rows="3" placeholder="Thông tin bổ sung cho lịch này"></textarea></label>
+    <p class="form-error" id="form-error" role="alert"></p>
+    <div class="dialog-actions"><button class="secondary-btn" type="button" data-close="record-dialog">Hủy</button><button class="save-btn" type="submit">Lưu lịch</button></div>
+  </form>
+</dialog>
+
+<dialog id="help-dialog">
+  <div class="dialog-inner">
+    <div class="dialog-head"><h2>Kết nối gửi email</h2><button class="dialog-close" type="button" data-close="help-dialog" aria-label="Đóng">×</button></div>
+    <div class="help-copy">
+      <p>Email gửi lúc khoảng 8 giờ sáng theo số ngày nhắc riêng từng lịch. PWA lưu thao tác khi offline và đồng bộ Sheet khi mạng trở lại; email vẫn do Apps Script gửi.</p>
+      <h3>Triển khai PWA miễn phí</h3>
+      <ol>
+        <li>Tạo public GitHub repository tên <code>username.github.io</code>, bật Pages từ nhánh <code>main</code>, thư mục gốc.</li>
+        <li>Đưa <code>index.html</code>, <code>config.js</code>, <code>manifest.webmanifest</code>, <code>icon.svg</code>, <code>icon-192.png</code>, <code>icon-512.png</code>, <code>sw.js</code> lên repo.</li>
+        <li>Trong Apps Script, thêm HTML <code>bridge</code>; đặt <code>PWA_APP_ORIGIN</code> trong <code>Code.gs</code> thành URL GitHub Pages.</li>
+        <li>Chạy <code>setPwaOrigin</code>, deploy Apps Script dạng Web app và dán URL <code>/exec</code> vào <code>config.js</code>, rồi push lên GitHub.</li>
+        <li>Mở PWA online và đăng nhập Google ít nhất một lần trên từng điện thoại; sau đó có thể nhập offline và đồng bộ lại khi có mạng.</li>
+      </ol>
+      <p>Cache offline nằm trong trình duyệt trên thiết bị, chưa mã hóa. Không dùng trên thiết bị dùng chung.</p>
+    </div>
+    <div class="dialog-actions"><button class="save-btn" type="button" data-close="help-dialog">Đã hiểu</button></div>
+  </div>
+</dialog>
+<dialog id="users-dialog">
+  <div class="dialog-inner">
+    <div class="dialog-head"><h2>Người được cấp quyền</h2><button class="dialog-close" type="button" data-close="users-dialog" aria-label="Đóng">×</button></div>
+    <div class="user-list" id="user-list"></div>
+    <form class="user-form" id="user-form">
+      <input id="user-email" type="email" autocomplete="email" placeholder="email@example.com" aria-label="Email Google cần mời" required>
+      <button class="save-btn" type="submit">Mời</button>
+    </form>
+    <p class="help-copy">Người được mời sẽ có quyền xem và sửa toàn bộ lịch chung. Quyền Sheet được cấp tự động; họ cần đăng nhập bằng đúng tài khoản Google này.</p>
+    <div class="dialog-actions"><button class="secondary-btn" type="button" data-close="users-dialog">Đóng</button></div>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+<iframe class="cloud-bridge" id="cloud-bridge" title="Kết nối Google Sheets" aria-hidden="true"></iframe>
+
+<script src="./config.js"></script>
+<script>
+'use strict';
+const $ = (selector) => document.querySelector(selector);
+const STORAGE_KEY = 'nhac-gia-han-records';
+const PWA_CONFIG = window.APP_CONFIG || {};
+const PWA_BRIDGE_URL = String(PWA_CONFIG.bridgeUrl || '').trim();
+const PWA_MODE = !!PWA_BRIDGE_URL;
+const PWA_LAST_USER_KEY = STORAGE_KEY + ':last-user';
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+let records = [];
+let filter = 'all';
+let editingId = '';
+let cloudMode = PWA_MODE || !!(window.google && google.script && google.script.run);
+let cloudAccessError = false;
+let currentUser = null;
+let currentUserEmail = '';
+let offlineMode = false;
+let syncInProgress = false;
+let pendingChanges = [];
+let toastTimer = 0;
+const bridgeFrame = $('#cloud-bridge');
+const bridgeRequests = new Map();
+let markBridgeReady;
+let bridgeWindow = null;
+let bridgeOrigin = '';
+const bridgeReady = new Promise((resolve) => { markBridgeReady = resolve; });
+
+function isFromBridgeFrame_(source) {
+  // Apps Script serves the bridge inside nested iframes, so walk up from the sender to our iframe.
+  for (let win = source, depth = 0; win && depth < 4; depth++) {
+    if (win === bridgeFrame.contentWindow) return true;
+    try { if (win === win.parent) break; win = win.parent; } catch { break; }
+  }
+  return false;
+}
+
+if (PWA_MODE) {
+  const bridgeUrl = new URL(PWA_BRIDGE_URL);
+  const isBridgeOrigin = (origin) => origin === bridgeUrl.origin || /^https:\/\/[a-z0-9-]+-script\.googleusercontent\.com$/i.test(origin);
+  bridgeUrl.searchParams.set('bridge', '1');
+  bridgeFrame.src = bridgeUrl.toString();
+  window.addEventListener('message', (event) => {
+    if (!isBridgeOrigin(event.origin) || !isFromBridgeFrame_(event.source)) return;
+    if (event.data?.type === 'reminder-bridge-ready') {
+      bridgeWindow = event.source;
+      bridgeOrigin = event.origin;
+      markBridgeReady();
+      return;
+    }
+    if (event.source !== bridgeWindow) return;
+    const pending = bridgeRequests.get(event.data?.requestId);
+    if (!pending) return;
+    clearTimeout(pending.timeout);
+    bridgeRequests.delete(event.data.requestId);
+    if (event.data.error) pending.reject(new Error(event.data.error));
+    else pending.resolve(event.data.result);
+  });
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+}
+
+function callCloud(method, ...args) {
+  if (!PWA_MODE) {
+    return new Promise((resolve, reject) => google.script.run.withSuccessHandler(resolve).withFailureHandler(reject)[method](...args));
+  }
+  return Promise.race([
+    bridgeReady,
+    new Promise((resolve, reject) => setTimeout(() => reject(new Error('Bridge chưa sẵn sàng.')), 20000)),
+  ]).then(() => new Promise((resolve, reject) => {
+    const requestId = crypto.randomUUID();
+    const timeout = setTimeout(() => {
+      bridgeRequests.delete(requestId);
+      reject(new Error('Kết nối Apps Script hết thời gian chờ.'));
+    }, 20000);
+    bridgeRequests.set(requestId, { resolve, reject, timeout });
+    bridgeWindow.postMessage({ requestId, method, args }, bridgeOrigin);
+  }));
+}
+
+function isAccessError_(error) {
+  return /chưa được quản trị viên cấp quyền|không xác minh được tài khoản|chỉ quản trị viên/i.test(error?.message || '');
+}
+
+function userCacheKey_(email) { return STORAGE_KEY + ':' + email.toLowerCase(); }
+
+function loadUserCache_(email) {
+  currentUserEmail = email.toLowerCase();
+  let cached = null;
+  try { cached = JSON.parse(localStorage.getItem(userCacheKey_(currentUserEmail)) || 'null'); } catch {}
+  if (!cached) {
+    records = [];
+    pendingChanges = [];
+    return false;
+  }
+  records = (cached.records || []).map((item) => ({
+    ...item, duration: Number(item.duration ?? item.months), unit: item.unit || 'months',
+    note: item.note || '', reminderDays: item.reminderDays ?? 7,
+  }));
+  pendingChanges = cached.pendingChanges || [];
+  pendingChanges.forEach(applyLocalChange_);
+  return true;
+}
+
+function applyLocalChange_(change) {
+  if (change.action === 'delete') {
+    records = records.filter((record) => record.id !== change.id);
+  } else if (change.action === 'save') {
+    const index = records.findIndex((record) => record.id === change.record.id);
+    if (index >= 0) records[index] = change.record;
+    else records.push(change.record);
+  }
+}
+
+function persistLocal() {
+  if (PWA_MODE && currentUserEmail) {
+    localStorage.setItem(userCacheKey_(currentUserEmail), JSON.stringify({ records, pendingChanges }));
+  } else {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  }
+}
+
+function setConnectionStatus_() {
+  if (cloudAccessError) {
+    $('#connection-state').textContent = 'Chưa cấp quyền';
+    $('#connection-state').classList.remove('cloud');
+    $('#users-btn').hidden = true;
+    $('#add-btn').disabled = true;
+    $('#local-note').hidden = true;
+    return;
+  }
+  const pending = pendingChanges.length;
+  $('#connection-state').textContent = offlineMode
+    ? `Ngoại tuyến · ${pending} chờ đồng bộ`
+    : syncInProgress ? 'Đang đồng bộ' : pending ? `Chờ đồng bộ · ${pending}` : 'Đã đồng bộ';
+  $('#connection-state').classList.toggle('cloud', !offlineMode && !pending && !syncInProgress);
+  $('#local-note').hidden = true;
+  $('#users-btn').hidden = !currentUser || currentUser.role !== 'admin' || offlineMode;
+  $('#add-btn').disabled = false;
+}
+
+async function syncPendingChanges() {
+  if (!PWA_MODE || !navigator.onLine || !currentUserEmail || syncInProgress) return false;
+  syncInProgress = true;
+  offlineMode = false;
+  setConnectionStatus_();
+  try {
+    const access = await callCloud('getAccessInfo');
+    const verifiedEmail = access.email.toLowerCase();
+    if (verifiedEmail !== currentUserEmail) {
+      currentUser = access;
+      currentUserEmail = verifiedEmail;
+      localStorage.setItem(PWA_LAST_USER_KEY, verifiedEmail);
+      loadUserCache_(verifiedEmail);
+    } else {
+      currentUser = access;
+    }
+    while (pendingChanges.length) {
+      const change = pendingChanges[0];
+      if (change.action === 'save') await callCloud('saveRecord', change.record);
+      else await callCloud('deleteRecord', change.id);
+      pendingChanges.shift();
+      persistLocal();
+    }
+    records = await callCloud('getRecords');
+    cloudAccessError = false;
+    return true;
+  } catch (error) {
+    if (isAccessError_(error)) cloudAccessError = true;
+    else offlineMode = true;
+    return false;
+  } finally {
+    syncInProgress = false;
+    persistLocal();
+    setConnectionStatus_();
+    render();
+  }
+}
+
+window.addEventListener('online', () => {
+  if (PWA_MODE && currentUserEmail) syncPendingChanges();
+});
+
+window.addEventListener('offline', () => {
+  if (!PWA_MODE || !currentUserEmail) return;
+  offlineMode = true;
+  setConnectionStatus_();
+});
+
+async function loadRecords() {
+  if (PWA_MODE) {
+    const savedEmail = localStorage.getItem(PWA_LAST_USER_KEY) || '';
+    if (!navigator.onLine) {
+      if (savedEmail && loadUserCache_(savedEmail)) {
+        currentUser = { email: savedEmail, role: 'user' };
+        offlineMode = true;
+        setConnectionStatus_();
+        return;
+      }
+      cloudAccessError = true;
+      $('#connection-state').textContent = 'Cần mở online lần đầu';
+      $('#add-btn').disabled = true;
+      showToast('Hãy mở app online và đăng nhập Google ít nhất một lần trước khi dùng offline.');
+      return;
+    }
+    try {
+      currentUser = await callCloud('getAccessInfo');
+      currentUserEmail = currentUser.email.toLowerCase();
+      localStorage.setItem(PWA_LAST_USER_KEY, currentUserEmail);
+      loadUserCache_(currentUserEmail);
+      cloudAccessError = false;
+      await syncPendingChanges();
+      return;
+    } catch (error) {
+      if (!isAccessError_(error) && savedEmail && loadUserCache_(savedEmail)) {
+        currentUser = { email: savedEmail, role: 'user' };
+        offlineMode = true;
+        setConnectionStatus_();
+        showToast('Không kết nối được Google Sheets; thay đổi sẽ chờ đồng bộ.');
+        return;
+      }
+      cloudAccessError = true;
+      $('#connection-state').textContent = 'Chưa cấp quyền';
+      $('#add-btn').disabled = true;
+      $('#local-note').hidden = true;
+      showToast(error.message || 'Không xác minh được tài khoản Google.');
+      return;
+    }
+  }
+
+  if (cloudMode) {
+    try {
+      currentUser = await callCloud('getAccessInfo');
+      records = await callCloud('getRecords');
+      $('#connection-state').textContent = 'Đã đồng bộ';
+      $('#connection-state').classList.add('cloud');
+      $('#users-btn').hidden = currentUser.role !== 'admin';
+      $('#local-note').hidden = true;
+      return;
+    } catch (error) {
+      cloudMode = false;
+      cloudAccessError = true;
+      $('#connection-state').textContent = 'Chưa cấp quyền';
+      $('#connection-state').classList.remove('cloud');
+      $('#add-btn').disabled = true;
+      $('#add-btn').title = 'Liên hệ quản trị viên để được mời bằng tài khoản Google của bạn';
+      $('#local-note').hidden = true;
+      showToast('Hãy đăng nhập tài khoản Google đã được quản trị viên cấp quyền.');
+      return;
+    }
+  }
+  records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]').map((item) => ({
+    ...item, duration: Number(item.duration ?? item.months), unit: item.unit || 'months', note: item.note || '', reminderDays: item.reminderDays ?? 7,
+  }));
+  $('#connection-state').textContent = 'Trên thiết bị';
+  $('#connection-state').classList.remove('cloud');
+  $('#users-btn').hidden = true;
+  $('#local-note').hidden = false;
+}
+
+function render() {
+  if (cloudAccessError) {
+    $('#soon-count').textContent = '—';
+    $('#active-count').textContent = '—';
+    $('#items').innerHTML = '<div class="empty"><strong>Chưa được cấp quyền</strong>Đăng nhập bằng tài khoản Google được quản trị viên mời.</div>';
+    return;
+  }
+  const soon = records.filter((item) => { const days = daysBetween(today, item.dueDate); return days >= 0 && days <= 30; });
+  $('#soon-count').textContent = soon.length;
+  $('#active-count').textContent = records.length;
+  const visible = records.filter((item) => {
+    const days = daysBetween(today, item.dueDate);
+    if (filter === 'soon') return days >= 0 && days <= 30;
+    if (filter === 'overdue') return days < 0;
+    return true;
+  }).sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+
+  if (!visible.length) {
+    $('#items').innerHTML = `<div class="empty"><strong>${records.length ? 'Không có lịch phù hợp' : 'Chưa có lịch gia hạn'}</strong>${records.length ? 'Thử một bộ lọc khác.' : 'Thêm lịch đầu tiên để theo dõi ngày đến hạn.'}</div>`;
+    return;
+  }
+
+  $('#items').innerHTML = visible.map((item) => {
+    const days = daysBetween(today, item.dueDate);
+    const state = days < 0 ? 'overdue' : days <= 30 ? 'soon' : '';
+    const label = days < 0 ? `Quá hạn ${Math.abs(days)} ngày` : days === 0 ? 'Đến hạn hôm nay' : `Còn ${days} ngày`;
+    return `<article class="item ${state}">
+      <div class="item-main"><h3 class="item-title">${esc(item.content)}</h3>
+        <p class="item-date">Bắt đầu ${formatDate(item.startDate)} · ${Number(item.duration ?? item.months)} ${item.unit === 'days' ? 'ngày' : item.unit === 'years' ? 'năm' : 'tháng'} · Hạn ${formatDate(item.dueDate)} · Nhắc trước ${Number(item.reminderDays ?? 7)} ngày</p>
+        <p class="item-emails">${esc(item.emails)}</p>${item.note ? `<p class="item-note">${esc(item.note)}</p>` : ''}</div>
+      <div class="item-side"><span class="due-label">${label}</span>
+        <div class="item-buttons"><button type="button" data-edit="${esc(item.id)}" aria-label="Sửa ${esc(item.content)}" title="Sửa">✎</button><button class="delete" type="button" data-delete="${esc(item.id)}" aria-label="Xóa ${esc(item.content)}" title="Xóa">×</button></div>
+      </div></article>`;
+  }).join('');
+}
+
+function showToast(message) {
+  const toast = $('#toast');
+  toast.textContent = message;
+  toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toast.hidden = true; }, 2800);
+}
+
+function esc(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+}
+
+function parseIsoDate(value) {
+  const [year, month, day] = String(value || '').split('-').map(Number);
+  return { year, month, day };
+}
+
+function isoDate(date) {
+  return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+}
+
+function formatDate(value) {
+  const parts = String(value || '').split('-');
+  return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : String(value || '');
+}
+
+function daysBetween(fromDate, toIso) {
+  const { year, month, day } = parseIsoDate(toIso);
+  if (!year || !month || !day) return NaN;
+  return Math.round((new Date(year, month - 1, day) - fromDate) / 86400000);
+}
+
+function dueDateFor(startIso, duration, unit = 'months') {
+  const { year, month, day } = parseIsoDate(startIso);
+  const amount = Number(duration);
+  if (unit === 'days') {
+    const date = new Date(Date.UTC(year, month - 1, day + amount));
+    return date.toISOString().slice(0, 10);
+  }
+  const totalMonths = month - 1 + (unit === 'years' ? amount * 12 : amount);
+  const targetYear = year + Math.floor(totalMonths / 12);
+  const targetMonth = totalMonths % 12;
+  const lastDay = new Date(Date.UTC(targetYear, targetMonth + 1, 0)).getUTCDate();
+  return new Date(Date.UTC(targetYear, targetMonth, Math.min(day, lastDay))).toISOString().slice(0, 10);
+}
+
+function isValidEmail(email) {
+  return /^[^\s@,;]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/.test(String(email || '').trim());
+}
+
+function refreshDuePreview() {
+  const start = $('#start-date').value;
+  const duration = Number($('#duration').value);
+  const unit = $('#duration-unit').value;
+  $('#duration').max = unit === 'days' ? '36500' : unit === 'years' ? '100' : '1200';
+  $('#due-preview').textContent = start && Number.isInteger(duration) && duration > 0
+    ? `Ngày đến hạn: ${formatDate(dueDateFor(start, duration, unit))}`
+    : 'Ngày đến hạn sẽ được tính tự động.';
+}
+
+function openForm(id = '') {
+  editingId = id;
+  const item = records.find((record) => record.id === id);
+  $('#form-title').textContent = item ? 'Sửa lịch gia hạn' : 'Thêm lịch gia hạn';
+  $('#content').value = item?.content || '';
+  $('#start-date').value = item?.startDate || isoDate(today);
+  $('#duration').value = item?.duration || item?.months || 6;
+  $('#duration-unit').value = item?.unit || 'months';
+  $('#duration').max = $('#duration-unit').value === 'days' ? '36500' : $('#duration-unit').value === 'years' ? '100' : '1200';
+  $('#emails').value = item?.emails || '';
+  $('#reminder-days').value = item?.reminderDays ?? 7;
+  $('#note').value = item?.note || '';
+  $('#form-error').textContent = '';
+  refreshDuePreview();
+  $('#record-dialog').showModal();
+  $('#content').focus();
+}
+
+$('#today-label').textContent = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(today);
+$('#add-btn').addEventListener('click', () => openForm());
+$('#help-btn').addEventListener('click', () => $('#help-dialog').showModal());
+$('#users-btn').addEventListener('click', async () => {
+  $('#users-dialog').showModal();
+  await refreshAllowedUsers();
+});
+document.querySelectorAll('[data-close]').forEach((button) => button.addEventListener('click', () => $('#' + button.dataset.close).close()));
+document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
+  filter = button.dataset.filter;
+  document.querySelectorAll('[data-filter]').forEach((tab) => tab.classList.toggle('active', tab === button));
+  render();
+}));
+$('#start-date').addEventListener('input', refreshDuePreview);
+$('#duration').addEventListener('input', refreshDuePreview);
+$('#duration-unit').addEventListener('change', refreshDuePreview);
+
+async function refreshAllowedUsers() {
+  try {
+    const users = await callCloud('getAllowedUsers');
+    $('#user-list').innerHTML = users.map((user) => `<div class="user-row"><div class="user-email">${esc(user.email)}<span class="user-role">${user.role === 'admin' ? 'Quản trị viên' : 'Được cấp quyền'}</span></div><button class="revoke-btn" type="button" data-revoke="${esc(user.email)}" ${user.role === 'admin' ? 'disabled' : ''}>${user.role === 'admin' ? 'Admin' : 'Thu hồi'}</button></div>`).join('');
+  } catch (error) {
+    showToast('Không tải được danh sách người dùng.');
+  }
+}
+
+$('#user-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const email = $('#user-email').value.trim();
+  const submit = $('#user-form button[type="submit"]');
+  submit.disabled = true;
+  try {
+    await callCloud('addAllowedUser', email);
+    $('#user-email').value = '';
+    await refreshAllowedUsers();
+    showToast('Đã cấp quyền cho ' + email + '.');
+  } catch (error) {
+    showToast(error.message || 'Không cấp được quyền. Hãy kiểm tra tài khoản và quyền chia sẻ Google Sheet.');
+  } finally {
+    submit.disabled = false;
+  }
+});
+
+$('#user-list').addEventListener('click', async (event) => {
+  const revoke = event.target.closest('[data-revoke]');
+  if (!revoke || !confirm('Thu hồi quyền truy cập của ' + revoke.dataset.revoke + '?')) return;
+  revoke.disabled = true;
+  try {
+    await callCloud('removeAllowedUser', revoke.dataset.revoke);
+    await refreshAllowedUsers();
+    showToast('Đã thu hồi quyền truy cập.');
+  } catch (error) {
+    showToast(error.message || 'Không thu hồi được quyền.');
+    revoke.disabled = false;
+  }
+});
+
+$('#items').addEventListener('click', async (event) => {
+  const edit = event.target.closest('[data-edit]');
+  const remove = event.target.closest('[data-delete]');
+  if (edit) openForm(edit.dataset.edit);
+  if (!remove) return;
+  const item = records.find((record) => record.id === remove.dataset.delete);
+  if (!item || !confirm(`Xóa lịch "${item.content}"?`)) return;
+  try {
+    if (PWA_MODE) {
+      pendingChanges.push({ action: 'delete', id: item.id });
+      applyLocalChange_(pendingChanges[pendingChanges.length - 1]);
+      persistLocal();
+      render();
+      const synced = navigator.onLine && await syncPendingChanges();
+      showToast(synced ? 'Đã xóa và đồng bộ.' : 'Đã xóa trên thiết bị; sẽ đồng bộ khi có mạng.');
+      return;
+    }
+    if (cloudMode) await callCloud('deleteRecord', item.id);
+    records = records.filter((record) => record.id !== item.id);
+    if (!cloudMode) persistLocal();
+    render();
+    showToast('Đã xóa lịch gia hạn.');
+  } catch (error) { showToast('Chưa xóa được. Vui lòng thử lại.'); }
+});
+
+$('#record-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const content = $('#content').value.trim();
+  const startDate = $('#start-date').value;
+  const duration = Number($('#duration').value);
+  const unit = $('#duration-unit').value;
+  const reminderDays = Number($('#reminder-days').value);
+  const emails = $('#emails').value.trim().split(/[;,\n]+/).map((email) => email.trim()).filter(Boolean);
+  const maxDuration = unit === 'days' ? 36500 : unit === 'years' ? 100 : 1200;
+  if (!content || !startDate || !Number.isInteger(duration) || duration < 1 || duration > maxDuration || !emails.length) {
+    $('#form-error').textContent = `Vui lòng nhập đủ thông tin và thời hạn từ 1 đến ${maxDuration} ${unit === 'days' ? 'ngày' : unit === 'years' ? 'năm' : 'tháng'}.`;
+    return;
+  }
+  if (emails.some((email) => !isValidEmail(email))) {
+    $('#form-error').textContent = 'Email phải có tên miền hợp lệ, ví dụ ten@gmail.com. Ngăn cách nhiều email bằng dấu phẩy.';
+    return;
+  }
+  if (!Number.isInteger(reminderDays) || reminderDays < 0 || reminderDays > 365) {
+    $('#form-error').textContent = 'Số ngày nhắc trước phải từ 0 đến 365.';
+    return;
+  }
+  const record = { id: editingId || crypto.randomUUID(), content, startDate, duration, unit, dueDate: dueDateFor(startDate, duration, unit), emails: emails.join(', '), note: $('#note').value.trim(), reminderDays };
+  try {
+    if (PWA_MODE) {
+      const change = { action: 'save', record };
+      pendingChanges.push(change);
+      applyLocalChange_(change);
+      persistLocal();
+      $('#record-dialog').close();
+      render();
+      const synced = navigator.onLine && await syncPendingChanges();
+      showToast(synced ? 'Đã lưu và đồng bộ.' : 'Đã lưu trên thiết bị; sẽ đồng bộ khi có mạng.');
+      return;
+    }
+    if (cloudMode) await callCloud('saveRecord', record);
+    const index = records.findIndex((item) => item.id === record.id);
+    if (index >= 0) records[index] = record;
+    else records.push(record);
+    if (!cloudMode) persistLocal();
+    $('#record-dialog').close();
+    render();
+    showToast(cloudMode ? 'Đã lưu và đồng bộ lịch.' : 'Đã lưu lịch trên thiết bị này.');
+  } catch (error) { $('#form-error').textContent = 'Không lưu được lên Google Sheets. Vui lòng tải lại trang và thử lại.'; }
+});
+
+loadRecords().then(render).catch(() => showToast('Không đọc được dữ liệu đã lưu.'));
+</script>
+</body>
+</html>
