@@ -1,6 +1,6 @@
 {
-  "name": "Nhắc gia hạn",
-  "short_name": "Nhắc hạn",
+  "name": "Remindue – Nhắc gia hạn",
+  "short_name": "Remindue",
   "description": "Theo dõi hạn và nhận email nhắc gia hạn",
   "lang": "vi",
   "start_url": "./",
